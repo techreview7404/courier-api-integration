@@ -1,0 +1,200 @@
+{
+  "info": {
+    "_postman_id": "a1b2c3d4-e5f6-7a8b-9c0d-1e2f3a4b5c6d",
+    "name": "Courier Integration Platform API",
+    "description": "Postman Collection for testing the Unified Courier Integration Platform API (Mock Courier and UrbaneBolt).",
+    "schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json"
+  },
+  "item": [
+    {
+      "name": "Health Check",
+      "request": {
+        "method": "GET",
+        "header": [],
+        "url": {
+          "raw": "{{base_url}}/health",
+          "host": [
+            "{{base_url}}"
+          ],
+          "path": [
+            "health"
+          ]
+        },
+        "description": "Check application health and database connection."
+      }
+    },
+    {
+      "name": "Create Order - Mock Courier",
+      "request": {
+        "method": "POST",
+        "header": [
+          {
+            "key": "Content-Type",
+            "value": "application/json"
+          }
+        ],
+        "body": {
+          "mode": "raw",
+          "raw": "{\n  \"order_id\": \"ORD-POSTMAN-001\",\n  \"courier_partner\": \"mock\",\n  \"customer\": {\n    \"name\": \"John Doe\",\n    \"phone\": \"9876543210\",\n    \"address\": \"Flat 101, Palm Grove, Pune, Maharashtra - 411001\"\n  },\n  \"items\": [\n    {\n      \"name\": \"Wireless Earbuds\",\n      \"quantity\": 1,\n      \"price\": 1499.0\n    }\n  ]\n}"
+        },
+        "url": {
+          "raw": "{{base_url}}/api/v1/orders",
+          "host": [
+            "{{base_url}}"
+          ],
+          "path": [
+            "api",
+            "v1",
+            "orders"
+          ]
+        }
+      }
+    },
+    {
+      "name": "Create Order - UrbaneBolt",
+      "request": {
+        "method": "POST",
+        "header": [
+          {
+            "key": "Content-Type",
+            "value": "application/json"
+          }
+        ],
+        "body": {
+          "mode": "raw",
+          "raw": "{\n  \"order_id\": \"ORD-UB-001\",\n  \"courier_partner\": \"urbanebolt\",\n  \"customer\": {\n    \"name\": \"Jane Roe\",\n    \"phone\": \"9876543211\",\n    \"address\": \"House 45, Sector 15, Gurgaon, Haryana - 122001\"\n  },\n  \"items\": [\n    {\n      \"name\": \"Smart Watch\",\n      \"quantity\": 1,\n      \"price\": 3999.0\n    }\n  ]\n}"
+        },
+        "url": {
+          "raw": "{{base_url}}/api/v1/orders",
+          "host": [
+            "{{base_url}}"
+          ],
+          "path": [
+            "api",
+            "v1",
+            "orders"
+          ]
+        }
+      }
+    },
+    {
+      "name": "Get Order By ID",
+      "request": {
+        "method": "GET",
+        "header": [],
+        "url": {
+          "raw": "{{base_url}}/api/v1/orders/ORD-POSTMAN-001",
+          "host": [
+            "{{base_url}}"
+          ],
+          "path": [
+            "api",
+            "v1",
+            "orders",
+            "ORD-POSTMAN-001"
+          ]
+        }
+      }
+    },
+    {
+      "name": "Track Order",
+      "request": {
+        "method": "GET",
+        "header": [],
+        "url": {
+          "raw": "{{base_url}}/api/v1/orders/ORD-POSTMAN-001/track",
+          "host": [
+            "{{base_url}}"
+          ],
+          "path": [
+            "api",
+            "v1",
+            "orders",
+            "ORD-POSTMAN-001",
+            "track"
+          ]
+        }
+      }
+    },
+    {
+      "name": "Cancel Order",
+      "request": {
+        "method": "POST",
+        "header": [],
+        "url": {
+          "raw": "{{base_url}}/api/v1/orders/ORD-POSTMAN-001/cancel",
+          "host": [
+            "{{base_url}}"
+          ],
+          "path": [
+            "api",
+            "v1",
+            "orders",
+            "ORD-POSTMAN-001",
+            "cancel"
+          ]
+        }
+      }
+    },
+    {
+      "name": "Bulk Order Submission",
+      "request": {
+        "method": "POST",
+        "header": [
+          {
+            "key": "Content-Type",
+            "value": "application/json"
+          }
+        ],
+        "body": {
+          "mode": "raw",
+          "raw": "{\n  \"orders\": [\n    {\n      \"order_id\": \"BULK-POSTMAN-001\",\n      \"courier_partner\": \"mock\",\n      \"customer\": {\n        \"name\": \"Bob Smith\",\n        \"phone\": \"9876543212\",\n        \"address\": \"Tower B, Apt 301, Pune, Maharashtra - 411001\"\n      },\n      \"items\": [\n        {\n          \"name\": \"Phone Charger\",\n          \"quantity\": 1,\n          \"price\": 499.0\n        }\n      ]\n    }\n  ]\n}"
+        },
+        "url": {
+          "raw": "{{base_url}}/api/v1/orders/bulk",
+          "host": [
+            "{{base_url}}"
+          ],
+          "path": [
+            "api",
+            "v1",
+            "orders",
+            "bulk"
+          ]
+        }
+      }
+    },
+    {
+      "name": "Poll Bulk Batch Status",
+      "request": {
+        "method": "GET",
+        "header": [],
+        "url": {
+          "raw": "{{base_url}}/api/v1/orders/bulk/:batch_id",
+          "host": [
+            "{{base_url}}"
+          ],
+          "path": [
+            "api",
+            "v1",
+            "orders",
+            "bulk",
+            ":batch_id"
+          ],
+          "variable": [
+            {
+              "key": "batch_id",
+              "value": "d8213b2c-c820-410e-a612-32b55f17a942"
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "variable": [
+    {
+      "key": "base_url",
+      "value": "http://localhost:8000"
+    }
+  ]
+}
